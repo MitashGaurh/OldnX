@@ -18,6 +18,7 @@ public class OldnXApplication extends MultiDexApplication {
 
     public static void plantTimberFileLogging() {
         Timber.plant(new FileLoggingTree());
+        //hello
     }
 
     @Override
