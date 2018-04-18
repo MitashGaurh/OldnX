@@ -1,4 +1,4 @@
-package com.oldandx.oldnx;
+package com.oldandx.oldnx.view.splash;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.oldandx.oldnx.OldnXApplication;
+import com.oldandx.oldnx.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -37,8 +40,6 @@ public class SplashActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this
                 , Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             OldnXApplication.plantTimberFileLogging();
-            //DeveloperOption.copyAppDataToLocal(this, this.getPackageName());
-
         } else {
             ActivityCompat.requestPermissions(this
                     , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, EXTERNAL_STORAGE_REQUEST_CODE);
