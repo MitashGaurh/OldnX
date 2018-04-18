@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oldandx.oldnx.viewmodel.LoginViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        tools:context=".view.login.LinkAccountFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Base.TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_20_dp"
+                android:text="@string/text_welcome_to_oldnx"
+                android:textColor="@color/colorWhite" />
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_60_dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dimen_10_dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/dimen_30_dp"
+                        android:layout_height="0.7dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/colorWhite" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_20_dp"
+                        android:layout_marginStart="@dimen/dimen_20_dp"
+                        android:text="@string/text_login_with"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_size_14_sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="@dimen/dimen_30_dp"
+                        android:layout_height="0.7dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/colorWhite" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="@dimen/dimen_10_dp"
+                    android:layout_marginStart="@dimen/dimen_10_dp"
+                    android:layout_marginTop="@dimen/dimen_20_dp"
+                    android:background="@drawable/bg_button_white"
+                    android:gravity="center"
+                    android:padding="@dimen/dimen_8_dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_facebook" />
+
+                    <TextView
+                        style="@style/Base.TextAppearance.AppCompat.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/dimen_10_dp"
+                        android:text="@string/text_facebook_login"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/text_size_16_sp" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/dimen_10_dp"
+                    android:background="@drawable/bg_button_white"
+                    android:paddingEnd="@dimen/dimen_10_dp"
+                    android:paddingStart="@dimen/dimen_10_dp"
+                    android:text="@string/text_create_account"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_size_16_sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dimen_60_dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dimen_10_dp"
+                android:text="@string/text_account_exist"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_12_sp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dimen_10_dp"
+                android:background="@drawable/bg_button_white_border"
+                android:paddingEnd="@dimen/dimen_10_dp"
+                android:paddingStart="@dimen/dimen_10_dp"
+                android:text="@string/text_login_now"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_16_sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/dimen_10_dp"
+                android:text="@string/text_terms_conditions"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_12_sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">OldnX</string>
 
+    <string name="facebook_app_id">1462264653878732</string>
+    <string name="fb_login_protocol_scheme">fb1462264653878732</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_welcome_to_oldnx">WELCOME TO OLDnX</string>
+    <string name="text_facebook_login">Continue with facebook</string>
+    <string name="text_create_account">Create Account</string>
+    <string name="text_account_exist">Already have an OLDnX account?</string>
+    <string name="text_login_now">login now</string>
+    <string name="text_terms_conditions"><![CDATA[By Continuing, you agree to our Terms & Conditions]]></string>
+    <string name="text_login_with">login with</string>
 </resources>
