@@ -35,5 +35,5 @@ ext {
     timberVersion = "4.6.0"
     calligraphyVersion = '2.2.0'
     playServicesVersion = '11.8.0'
-    volleyVersion = '1.0.0'
+    retrofitVersion = '2.4.0'
 }
