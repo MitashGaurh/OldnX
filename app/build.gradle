@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.android.support:design:' + rootProject.supportLibVersion
     implementation 'com.android.support:cardview-v7:' + rootProject.supportLibVersion
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-vector-drawable:' + rootProject.supportLibVersion
 
     //lifecycle architecture components libs.
     implementation 'android.arch.lifecycle:extensions:' + rootProject.lifecycleVersion
@@ -52,6 +53,12 @@ dependencies {
 
     //for Network call
     implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
+
+    implementation 'com.github.bumptech.glide:glide:' + rootProject.glideVersion
+    annotationProcessor 'com.github.bumptech.glide:compiler:' + rootProject.glideVersion
+
+    // Facebook Login only
+    implementation 'com.facebook.android:facebook-login:' + rootProject.facebookSDKVersion
 
     // convert Java Objects into their JSON representation
     implementation 'com.google.code.gson:gson:2.8.0'
