@@ -3,7 +3,6 @@ package com.oldandx.oldnx.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.oldandx.oldnx.vo.event.SingleLiveEvent;
 
@@ -16,7 +15,9 @@ public class LinkAccountViewModel extends AndroidViewModel {
 
     private final SingleLiveEvent<Void> mContinueWithFaceBookEvent = new SingleLiveEvent<>();
 
-    public LinkAccountViewModel(@NonNull Application application) {
+    private final SingleLiveEvent<Void> mLoginNowEvent = new SingleLiveEvent<>();
+
+    LinkAccountViewModel(@NonNull Application application) {
         super(application);
     }
 
@@ -24,11 +25,15 @@ public class LinkAccountViewModel extends AndroidViewModel {
         return mContinueWithFaceBookEvent;
     }
 
+    public SingleLiveEvent<Void> getLoginNowEvent() {
+        return mLoginNowEvent;
+    }
+
     public void continueWithFacebook() {
         mContinueWithFaceBookEvent.call();
     }
 
     public void loginNow() {
-        Log.d(TAG, "loginNow: ");
+        mLoginNowEvent.call();
     }
 }

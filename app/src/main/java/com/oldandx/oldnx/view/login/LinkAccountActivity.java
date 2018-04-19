@@ -45,7 +45,10 @@ public class LinkAccountActivity extends AppCompatActivity {
 
         if (null == savedInstanceState) {
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager()
-                    , LinkAccountFragment.newInstance(), R.id.link_account_container, true, null);
+                    , LinkAccountFragment.newInstance()
+                    , R.id.link_account_container
+                    , false
+                    , LinkAccountFragment.class.getSimpleName());
         }
 
         subscribeToLiveData();

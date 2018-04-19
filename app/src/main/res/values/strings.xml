@@ -12,5 +12,9 @@
     <string name="text_account_exist">Already have an OLDnX account?</string>
     <string name="text_login_now">login now</string>
     <string name="text_terms_conditions"><![CDATA[By Continuing, you agree to our Terms & Conditions]]></string>
+    <string name="text_start_buying_selling"><![CDATA[TO START BUYING & SELLING]]></string>
     <string name="text_login_with">login with</string>
+    <string name="text_login">Login</string>
+    <string name="text_email">Email</string>
+    <string name="text_password">Password</string>
 </resources>

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 
 import com.oldandx.oldnx.viewmodel.ViewModelFactory;
 
@@ -25,12 +26,16 @@ public final class ActivityUtils {
      */
     public static void addFragmentToActivity(@Nullable FragmentManager fragmentManager,
                                              @NonNull Fragment fragment, int frameId,
-                                             boolean isAddtoBackStack, @Nullable String tag) {
+                                             boolean isAddToBackStack, @Nullable String tag) {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(frameId, fragment);
-        if (isAddtoBackStack) {
+        if (null != tag) {
+            transaction.replace(frameId, fragment, tag);
+        } else {
+            transaction.replace(frameId, fragment);
+        }
+        if (isAddToBackStack) {
             transaction.addToBackStack(fragment.getClass().getSimpleName());
         }
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -47,6 +52,29 @@ public final class ActivityUtils {
         checkNotNull(nonUIFragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(nonUIFragment, fragmentTag);
+        transaction.commit();
+    }
+
+    /**
+     * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
+     * performed by the {@code fragmentManager}.
+     */
+    public static void addFragmentToActivityWithSharedElement(@Nullable FragmentManager fragmentManager,
+                                                              @NonNull Fragment fragment, int frameId,
+                                                              View sharedElement, String transitionName,
+                                                              boolean isAddToBackStack, @Nullable String tag) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.addSharedElement(sharedElement, transitionName);
+        if (null != tag) {
+            transaction.replace(frameId, fragment, tag);
+        } else {
+            transaction.replace(frameId, fragment);
+        }
+        if (isAddToBackStack) {
+            transaction.addToBackStack(fragment.getClass().getSimpleName());
+        }
         transaction.commit();
     }
 
