@@ -60,9 +60,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(LoginViewModel.class)) {
+        if (modelClass.isAssignableFrom(LinkAccountViewModel.class)) {
             //noinspection unchecked
-            return (T) new LoginViewModel(mApplication);
+            return (T) new LinkAccountViewModel(mApplication);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

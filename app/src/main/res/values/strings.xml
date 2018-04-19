@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">OldnX</string>
 
-    <string name="facebook_app_id">1462264653878732</string>
-    <string name="fb_login_protocol_scheme">fb1462264653878732</string>
+    <string name="facebook_app_id">162082391134793</string>
+    <string name="fb_login_protocol_scheme">fb162082391134793</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

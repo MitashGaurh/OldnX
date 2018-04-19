@@ -2,6 +2,7 @@ package com.oldandx.oldnx.view.login;
 
 
 import android.app.Activity;
+import android.arch.lifecycle.Observer;
 import android.databinding.DataBindingComponent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,11 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.oldandx.oldnx.binding.FragmentDataBindingComponent;
 import com.oldandx.oldnx.databinding.FragmentLinkAccountBinding;
 import com.oldandx.oldnx.utils.ActivityUtils;
 import com.oldandx.oldnx.utils.AutoClearedValue;
-import com.oldandx.oldnx.viewmodel.LoginViewModel;
+import com.oldandx.oldnx.viewmodel.LinkAccountViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +35,7 @@ public class LinkAccountFragment extends Fragment {
 
     private AutoClearedValue<FragmentLinkAccountBinding> mBinding;
 
-    private LoginViewModel mLoginViewModel;
+    private LinkAccountViewModel mLinkAccountViewModel;
 
     private FragmentActivity mFragmentActivity;
 
@@ -40,10 +46,17 @@ public class LinkAccountFragment extends Fragment {
         mFragmentActivity = (FragmentActivity) activity;
     }
 
+    public static LinkAccountFragment newInstance() {
+        return new LinkAccountFragment();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLoginViewModel = ActivityUtils.obtainViewModel(mFragmentActivity, LoginViewModel.class);
+
+        mLinkAccountViewModel = ActivityUtils.obtainViewModel(mFragmentActivity, LinkAccountViewModel.class);
+
+        subscribeToLiveData();
     }
 
     @Override
@@ -63,7 +76,10 @@ public class LinkAccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mFragmentLoginBinding.setViewModel(mLoginViewModel);
+        mFragmentLoginBinding.setViewModel(mLinkAccountViewModel);
     }
 
+    private void subscribeToLiveData() {
+
+    }
 }
