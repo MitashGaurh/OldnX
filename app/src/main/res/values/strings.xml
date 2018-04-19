@@ -14,7 +14,10 @@
     <string name="text_terms_conditions"><![CDATA[By Continuing, you agree to our Terms & Conditions]]></string>
     <string name="text_start_buying_selling"><![CDATA[TO START BUYING & SELLING]]></string>
     <string name="text_login_with">login with</string>
+    <string name="next">Next</string>
     <string name="text_login">Login</string>
     <string name="text_email">Email</string>
     <string name="text_password">Password</string>
+    <string name="button_text_done">Done</string>
+    <string name="button_text_next">Next</string>
 </resources>
