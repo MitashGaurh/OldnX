@@ -12,6 +12,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.oldandx.oldnx.R;
 import com.oldandx.oldnx.utils.ActivityUtils;
+import com.oldandx.oldnx.view.navigation.NavigationActivity;
 import com.oldandx.oldnx.viewmodel.LinkAccountViewModel;
 import com.oldandx.oldnx.vo.AppConstants;
 
@@ -51,12 +52,15 @@ public class LinkAccountActivity extends AppCompatActivity {
                     , LinkAccountFragment.class.getSimpleName());
         }
 
-        subscribeToLiveData();
+        subscribeToViewEvent();
     }
 
-    private void subscribeToLiveData() {
+    private void subscribeToViewEvent() {
         mLinkAccountViewModel.getContinueWithFaceBookEvent().observe(this
                 , aVoid -> performFacebookLogin());
+
+        mLinkAccountViewModel.getLoginNowEvent().observe(this
+                , aVoid -> startActivity(new Intent(this, NavigationActivity.class)));
     }
 
     @Override

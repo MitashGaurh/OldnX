@@ -1,6 +1,5 @@
 package com.oldandx.oldnx.view.boarding;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,32 +12,28 @@ import java.util.List;
 
 public class BoardingViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<BoardingViewPagerModel> welcomePhotos;
-    private Context mContext;
+    private List<BoardingViewPagerModel> mBoardingImagesList;
 
-    public static class BoardingViewPagerModel {
-        int pageNumber;
-
-
-        public BoardingViewPagerModel(int pageNumber) {
-            this.pageNumber = pageNumber;
-        }
-    }
-
-    public BoardingViewPagerAdapter(FragmentManager fm, Context context, List<BoardingViewPagerModel> images) {
+    BoardingViewPagerAdapter(FragmentManager fm, List<BoardingViewPagerModel> boardingImages) {
         super(fm);
-
-        mContext = context;
-        welcomePhotos = images;
+        mBoardingImagesList = boardingImages;
     }
 
     @Override
     public int getCount() {
-        return welcomePhotos.size();
+        return mBoardingImagesList.size();
     }
 
     @Override
     public Fragment getItem(int position) {
-        return BoardingFragment.create(position);
+        return BoardingFragment.newInstance(position);
+    }
+
+    static class BoardingViewPagerModel {
+        int pageNumber;
+
+        BoardingViewPagerModel(int pageNumber) {
+            this.pageNumber = pageNumber;
+        }
     }
 }

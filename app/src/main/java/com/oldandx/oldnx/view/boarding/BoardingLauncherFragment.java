@@ -3,7 +3,6 @@ package com.oldandx.oldnx.view.boarding;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingComponent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,25 +15,32 @@ import android.view.ViewGroup;
 
 import com.oldandx.oldnx.R;
 import com.oldandx.oldnx.binding.FragmentDataBindingComponent;
-import com.oldandx.oldnx.databinding.FragmentBoardingBinding;
+import com.oldandx.oldnx.databinding.FragmentBoardingLauncherBinding;
 import com.oldandx.oldnx.utils.AutoClearedValue;
 import com.oldandx.oldnx.view.login.LinkAccountActivity;
-import com.oldandx.oldnx.view.widgets.pagerindicator.CirclePageIndicator;
+import com.oldandx.oldnx.view.common.pageindicator.CirclePageIndicator;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 public class BoardingLauncherFragment extends Fragment {
 
-    private FragmentActivity mFragmentActivity;
-    private FragmentBoardingBinding mFragmentBoardingBinding;
+
     private DataBindingComponent mDataBindingComponent = new FragmentDataBindingComponent(this);
-    private AutoClearedValue<FragmentBoardingBinding> mBinding;
-    private BoardingViewPagerAdapter mPagerAdapter = null;
-    private ViewPager mOnBoardingPager = null;
-    private int mSelectedPageIndex = -1;
-    private boolean mExitWhenScrollNextPage = false;
+
+    private AutoClearedValue<FragmentBoardingLauncherBinding> mBinding;
+
+    private BoardingViewPagerAdapter mPagerAdapter;
+
+    private ViewPager mOnBoardingPager;
+
+    private FragmentActivity mFragmentActivity;
+
+    private static BoardingViewPagerAdapter.BoardingViewPagerModel[] BOARDING_MODELS = {
+            new BoardingViewPagerAdapter.BoardingViewPagerModel(1),
+            new BoardingViewPagerAdapter.BoardingViewPagerModel(2),
+            new BoardingViewPagerAdapter.BoardingViewPagerModel(3),
+            new BoardingViewPagerAdapter.BoardingViewPagerModel(4)
+    };
 
     public static BoardingLauncherFragment newInstance() {
         return new BoardingLauncherFragment();
@@ -52,60 +58,53 @@ public class BoardingLauncherFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        mFragmentBoardingBinding
-                = FragmentBoardingBinding.inflate(inflater, container, false, mDataBindingComponent);
+        FragmentBoardingLauncherBinding fragmentBoardingLauncherBinding
+                = FragmentBoardingLauncherBinding.inflate(inflater, container, false, mDataBindingComponent);
 
-        mBinding = new AutoClearedValue<>(this, mFragmentBoardingBinding);
+        mBinding = new AutoClearedValue<>(this, fragmentBoardingLauncherBinding);
 
-        return mFragmentBoardingBinding.getRoot();
+        return fragmentBoardingLauncherBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        observeUIEvents();
-        initViewPager();
-       // mFragmentBoardingBinding.setViewModel(mLinkAccountViewModel);
-    }
+        subscribeViewEvents();
 
-    private static BoardingViewPagerAdapter.BoardingViewPagerModel[] arrBoardingModel = {
-            new BoardingViewPagerAdapter.BoardingViewPagerModel(1),
-            new BoardingViewPagerAdapter.BoardingViewPagerModel(2),
-            new BoardingViewPagerAdapter.BoardingViewPagerModel(3),
-            new BoardingViewPagerAdapter.BoardingViewPagerModel(4)
-    };
+        initViewPager();
+    }
 
     //region Private Methods
     private void initViewPager() {
-        List<BoardingViewPagerAdapter.BoardingViewPagerModel> images  = new ArrayList<>();
-        Collections.addAll(images, arrBoardingModel);
 
-        mPagerAdapter = new BoardingViewPagerAdapter(mFragmentActivity.getSupportFragmentManager() , mFragmentActivity, images);
+        if (mPagerAdapter == null) {
+            mPagerAdapter = new BoardingViewPagerAdapter(mFragmentActivity.getSupportFragmentManager(), Arrays.asList(BOARDING_MODELS));
+        }
 
         // Set View Pager
-        mOnBoardingPager = mBinding.get().vpOnBoardJourn;
+        mOnBoardingPager = mBinding.get().vpBoarding;
         mOnBoardingPager.setOffscreenPageLimit(mPagerAdapter.getCount());
         mOnBoardingPager.setAdapter(mPagerAdapter);
-        mOnBoardingPager.addOnPageChangeListener(pagerListener);
+        mOnBoardingPager.addOnPageChangeListener(mOnBoardingPagerListener);
 
-        CirclePageIndicator mCirclePageIndicator = mBinding.get().cpiWelcomeScreen;
-        mCirclePageIndicator.setViewPager(mOnBoardingPager);
+        CirclePageIndicator circlePageIndicator = mBinding.get().cpiWelcomeScreen;
+        circlePageIndicator.setViewPager(mOnBoardingPager);
     }
 
-    private ViewPager.OnPageChangeListener pagerListener = new ViewPager.SimpleOnPageChangeListener() {
+    private ViewPager.OnPageChangeListener mOnBoardingPagerListener = new ViewPager.SimpleOnPageChangeListener() {
 
         @Override
         public void onPageSelected(final int position) {
-            mSelectedPageIndex = position;
 
             int currPage = mOnBoardingPager.getCurrentItem();
-            int totalPages = arrBoardingModel.length;
+            int totalPages = BOARDING_MODELS.length;
 
-            if(currPage == (totalPages-1)) {
+            if (currPage == (totalPages - 1)) {
                 mBinding.get().btnNext.setText(R.string.button_text_done);
-            }else{
-
+                mBinding.get().btnSkip.setVisibility(View.GONE);
+            } else {
+                mBinding.get().btnSkip.setVisibility(View.VISIBLE);
                 mBinding.get().btnNext.setText(R.string.button_text_next);
             }
 
@@ -113,42 +112,40 @@ public class BoardingLauncherFragment extends Fragment {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            if (mExitWhenScrollNextPage && position == mPagerAdapter.getCount() - 1) {
-                mExitWhenScrollNextPage = false; // avoid call more times
-            }
+
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
             super.onPageScrollStateChanged(state);
-
-            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                mExitWhenScrollNextPage = mSelectedPageIndex == mPagerAdapter.getCount() - 1;
-            }
         }
     };
 
 
-    private void observeUIEvents() {
-        mBinding.get().btnNext.setOnClickListener(view -> {
-            walkThroughOnBoardingPages();
-        });
+    private void subscribeViewEvents() {
+        mBinding.get().btnNext.setOnClickListener(view
+                -> walkThroughOnBoardingPages());
+
+        mBinding.get().btnSkip.setOnClickListener(v
+                -> navigateToLinkAccountActivity());
     }
 
     private void walkThroughOnBoardingPages() {
         int currPage = mOnBoardingPager.getCurrentItem();
-        int totalPages = arrBoardingModel.length;
+        int totalPages = BOARDING_MODELS.length;
 
-        if(mBinding.get().btnNext.getText().toString().equals(getResources().getString(R.string.button_text_done))){
-            mFragmentActivity.getSupportFragmentManager().popBackStackImmediate();
-
-            startActivity(new Intent(mFragmentActivity, LinkAccountActivity.class));
-            mFragmentActivity.finish();
+        if (mBinding.get().btnNext.getText().toString().equals(getResources().getString(R.string.button_text_done))) {
+            navigateToLinkAccountActivity();
         }
 
-        if(currPage < totalPages){
+        if (currPage < totalPages) {
             mOnBoardingPager.setCurrentItem(++currPage);
         }
+    }
+
+    private void navigateToLinkAccountActivity() {
+        startActivity(new Intent(mFragmentActivity, LinkAccountActivity.class));
+        mFragmentActivity.finish();
     }
     //endregion
 

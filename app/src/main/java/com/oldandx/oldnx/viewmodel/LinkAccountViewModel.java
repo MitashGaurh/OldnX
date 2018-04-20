@@ -15,6 +15,8 @@ public class LinkAccountViewModel extends AndroidViewModel {
 
     private final SingleLiveEvent<Void> mContinueWithFaceBookEvent = new SingleLiveEvent<>();
 
+    private final SingleLiveEvent<Void> mAccountExistEvent = new SingleLiveEvent<>();
+
     private final SingleLiveEvent<Void> mLoginNowEvent = new SingleLiveEvent<>();
 
     LinkAccountViewModel(@NonNull Application application) {
@@ -25,12 +27,20 @@ public class LinkAccountViewModel extends AndroidViewModel {
         return mContinueWithFaceBookEvent;
     }
 
+    public SingleLiveEvent<Void> getAccountExistEvent() {
+        return mAccountExistEvent;
+    }
+
     public SingleLiveEvent<Void> getLoginNowEvent() {
         return mLoginNowEvent;
     }
 
     public void continueWithFacebook() {
         mContinueWithFaceBookEvent.call();
+    }
+
+    public void alreadyHaveAccount() {
+        mAccountExistEvent.call();
     }
 
     public void loginNow() {

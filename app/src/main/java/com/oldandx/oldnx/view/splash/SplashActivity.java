@@ -1,7 +1,6 @@
 package com.oldandx.oldnx.view.splash;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,17 +12,16 @@ import com.oldandx.oldnx.OldnXApplication;
 import com.oldandx.oldnx.R;
 import com.oldandx.oldnx.utils.ActivityUtils;
 import com.oldandx.oldnx.view.boarding.BoardingLauncherFragment;
-import com.oldandx.oldnx.view.login.LinkAccountActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
     private static final int EXTERNAL_STORAGE_REQUEST_CODE = 1001;
+
     public static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_splash);
 
         if (null == savedInstanceState) {
@@ -65,16 +63,13 @@ public class SplashActivity extends AppCompatActivity {
 
     private void moveToLinkAccountActivity() {
         new Handler().postDelayed(()
-                        -> {
-
-                    ActivityUtils.addFragmentToActivity(getSupportFragmentManager()
-                            , BoardingLauncherFragment.newInstance()
-                            , R.id.splash_container, false, TAG);
-
-                    //startActivity(new Intent(SplashActivity.this, LinkAccountActivity.class));
-                    //finish();
-                }
-                , 3000);
+                -> {
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager()
+                    , BoardingLauncherFragment.newInstance()
+                    , R.id.splash_container
+                    , false
+                    , BoardingLauncherFragment.class.getSimpleName());
+        }, 3000);
     }
     //endregion
 }

@@ -54,7 +54,7 @@ public class LinkAccountFragment extends Fragment {
 
         mLinkAccountViewModel = ActivityUtils.obtainViewModel(mFragmentActivity, LinkAccountViewModel.class);
 
-        subscribeToLiveData();
+        subscribeToViewEvent();
     }
 
     @Override
@@ -79,8 +79,8 @@ public class LinkAccountFragment extends Fragment {
         ViewCompat.setTransitionName(mBinding.get().ivSharedLogo, "logoTransition");
     }
 
-    private void subscribeToLiveData() {
-        mLinkAccountViewModel.getLoginNowEvent().observe(this
+    private void subscribeToViewEvent() {
+        mLinkAccountViewModel.getAccountExistEvent().observe(this
                 , aVoid -> {
                     LoginFragment loginFragment = LoginFragment.newInstance();
                     loginFragment.setSharedElementEnterTransition(new DetailsTransition());

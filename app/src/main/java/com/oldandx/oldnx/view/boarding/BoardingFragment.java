@@ -7,16 +7,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.AppCompatDrawableManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.oldandx.oldnx.R;
 import com.oldandx.oldnx.binding.FragmentDataBindingComponent;
-import com.oldandx.oldnx.databinding.FragmentBoardingSlidePageBinding;
-import com.oldandx.oldnx.utils.ActivityUtils;
+import com.oldandx.oldnx.databinding.FragmentBoardingBinding;
 import com.oldandx.oldnx.utils.AutoClearedValue;
 
 /**
@@ -25,35 +22,31 @@ import com.oldandx.oldnx.utils.AutoClearedValue;
 
 public class BoardingFragment extends Fragment {
 
-    public static final String ARG_PAGE = "page";
+    public static final String ARG_PAGE_NUMBER = "argPageNumber";
 
-    private FragmentActivity mFragmentActivity;
-    private FragmentBoardingSlidePageBinding mFragmentBoardingSlidePageBinding;
     private DataBindingComponent mDataBindingComponent = new FragmentDataBindingComponent(this);
-    private AutoClearedValue<FragmentBoardingSlidePageBinding> mBinding;
+
+    private AutoClearedValue<FragmentBoardingBinding> mBinding;
 
     private int mPageNumber;
-    private ImageView imgViewWelcomeScreen;
 
-    public static BoardingFragment create(int pageNumber) {
+    public static BoardingFragment newInstance(int pageNumber) {
         BoardingFragment fragment = new BoardingFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mFragmentActivity = (FragmentActivity) activity;
+        Bundle args = new Bundle();
+        args.putInt(ARG_PAGE_NUMBER, pageNumber);
+        fragment.setArguments(args);
+
+        return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPageNumber = getArguments().getInt(ARG_PAGE);
+
+        if (null != getArguments()) {
+            mPageNumber = getArguments().getInt(ARG_PAGE_NUMBER);
+        }
     }
 
     @Override
@@ -61,16 +54,14 @@ public class BoardingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        mFragmentBoardingSlidePageBinding
-                = FragmentBoardingSlidePageBinding.inflate(inflater, container, false, mDataBindingComponent);
+        FragmentBoardingBinding fragmentBoardingSlidePageBinding
+                = FragmentBoardingBinding.inflate(inflater, container, false, mDataBindingComponent);
 
-        mBinding = new AutoClearedValue<>(this, mFragmentBoardingSlidePageBinding);
+        mBinding = new AutoClearedValue<>(this, fragmentBoardingSlidePageBinding);
 
-        imgViewWelcomeScreen = mBinding.get().imgviewWelcomescreen;
+        initPageContent();
 
-        setPageContent();
-
-        return mFragmentBoardingSlidePageBinding.getRoot();
+        return fragmentBoardingSlidePageBinding.getRoot();
     }
 
     @Override
@@ -83,33 +74,29 @@ public class BoardingFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    private void setPageContent(){
-        switch (getPageNumber()){
+    private void initPageContent() {
 
+        String drawableName = "screen_1";
+
+        switch (getPageNumber()) {
             case 0:
-                imgViewWelcomeScreen.setImageResource(ActivityUtils.getDrawableByName(mFragmentActivity, "screen_1"));
-               // imgViewWelcomeScreen.setImageDrawable(AppCompatDrawableManager.get().getDrawable(getContext(), R.drawable.screen_1));
+                drawableName = "screen_1";
                 break;
 
             case 1:
-                imgViewWelcomeScreen.setImageResource(ActivityUtils.getDrawableByName(mFragmentActivity, "screen_1"));
-
-                // imgViewWelcomeScreen.setImageDrawable(AppCompatDrawableManager.get().getDrawable(getContext(), R.drawable.screen_1));
+                drawableName = "screen_1";
                 break;
 
             case 2:
-                imgViewWelcomeScreen.setImageResource(ActivityUtils.getDrawableByName(mFragmentActivity, "screen_1"));
-
-                // imgViewWelcomeScreen.setImageDrawable(AppCompatDrawableManager.get().getDrawable(getContext(), R.drawable.screen_1));
+                drawableName = "screen_1";
                 break;
 
             case 3:
-                imgViewWelcomeScreen.setImageResource(ActivityUtils.getDrawableByName(mFragmentActivity, "screen_1"));
-
-                // imgViewWelcomeScreen.setImageDrawable(AppCompatDrawableManager.get().getDrawable(getContext(), R.drawable.screen_1));
+                drawableName = "screen_1";
                 break;
 
         }
+        mBinding.get().setResourceId(R.drawable.screen_1);
     }
 
     public int getPageNumber() {

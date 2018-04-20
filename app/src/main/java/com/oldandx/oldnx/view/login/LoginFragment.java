@@ -13,11 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oldandx.oldnx.R;
 import com.oldandx.oldnx.binding.FragmentDataBindingComponent;
-import com.oldandx.oldnx.databinding.FragmentLinkAccountBinding;
 import com.oldandx.oldnx.databinding.FragmentLoginBinding;
+import com.oldandx.oldnx.utils.ActivityUtils;
 import com.oldandx.oldnx.utils.AutoClearedValue;
+import com.oldandx.oldnx.viewmodel.LinkAccountViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +27,8 @@ public class LoginFragment extends Fragment {
     private DataBindingComponent mDataBindingComponent = new FragmentDataBindingComponent(this);
 
     private FragmentLoginBinding mFragmentLoginBinding;
+
+    private LinkAccountViewModel mLinkAccountViewModel;
 
     private AutoClearedValue<FragmentLoginBinding> mBinding;
 
@@ -44,6 +46,13 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mLinkAccountViewModel = ActivityUtils.obtainViewModel(mFragmentActivity, LinkAccountViewModel.class);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mFragmentLoginBinding
@@ -57,6 +66,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mFragmentLoginBinding.setViewModel(mLinkAccountViewModel);
 
         ViewCompat.setTransitionName(mBinding.get().ivSharedLogo, "logoTransition");
     }

@@ -148,7 +148,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="@dimen/dimen_10_dp"
                 android:background="@drawable/bg_white_border"
-                android:onClick="@{() -> viewModel.loginNow()}"
+                android:onClick="@{() -> viewModel.alreadyHaveAccount()}"
                 android:paddingEnd="@dimen/dimen_10_dp"
                 android:paddingStart="@dimen/dimen_10_dp"
                 android:text="@string/text_login_now"

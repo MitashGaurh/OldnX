@@ -1,4 +1,4 @@
-package com.oldandx.oldnx.view.widgets.pagerindicator;
+package com.oldandx.oldnx.view.common.pageindicator;
 
 import android.content.Context;
 import android.content.res.Resources;

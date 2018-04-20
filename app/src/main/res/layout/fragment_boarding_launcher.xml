@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.oldandx.oldnx.view.splash.SplashActivity">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_boarding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <com.oldandx.oldnx.view.common.pageindicator.CirclePageIndicator
+                android:id="@+id/cpi_welcome_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:clickable="false"
+                app:fades="false"
+                app:fillColor="#ffffff"
+                app:pageColor="#66ffffff"
+                app:radius="4dp" />
+
+            <Button
+                android:id="@+id/btn_skip"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_margin="@dimen/dimen_10_dp"
+                android:text="Skip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/btn_next"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/dimen_10_dp"
+                android:text="@string/next"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

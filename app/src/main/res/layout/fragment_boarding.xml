@@ -1,56 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
-     <!--   <variable
-            name="viewModel"
-            type="com.oldandx.oldnx.viewmodel.LinkAccountViewModel" />-->
+        <variable
+            name="resourceId"
+            type="Integer" />
     </data>
 
     <RelativeLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_boarding_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.oldandx.oldnx.view.splash.SplashActivity">
+        android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vpOnBoardJourn"
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_boarding_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            app:imageFromResource="@{resourceId}" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_alignParentBottom="true">
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_margin="10dp"
+            android:tint="@color/colorPrimaryDark"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_logo" />
 
-            <com.oldandx.oldnx.view.widgets.pagerindicator.CirclePageIndicator
-                android:id="@+id/cpi_welcome_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:clickable="false"
-                app:fades="false"
-                app:fillColor="#ffffff"
-                app:pageColor="#66ffffff"
-                app:radius="4dp" />
-
-            <TextView
-                android:id="@+id/btnNext"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/boarding_text_bg"
-                android:gravity="center_vertical"
-                android:paddingLeft="18dp"
-                android:paddingRight="18dp"
-                android:text="@string/next"
-                android:textAllCaps="true"
-                android:textColor="#ffffff"
-                android:textSize="16sp" />
-
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:minLines="2"
+            android:textColor="#ffffff"
+            android:textSize="27sp"
+            tools:text="Welcome to OLDnX" />
 
     </RelativeLayout>
 </layout>
