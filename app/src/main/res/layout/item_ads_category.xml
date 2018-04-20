@@ -11,16 +11,16 @@
     </data>
 
     <LinearLayout
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_20_dp"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/iv_category_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:adjustViewBounds="true"
+            android:layout_gravity="center"
             tools:src="@drawable/bikes"
             app:imageFromResource="@{resourceId}"/>
 
@@ -28,10 +28,10 @@
             android:id="@+id/tv_category_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/dimen_10_dp"
             android:textColor="@color/theme.Gray"
             android:gravity="center"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_5_dp"
             tools:text="Category Name"/>
 
     </LinearLayout>

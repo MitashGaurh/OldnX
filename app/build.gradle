@@ -15,7 +15,13 @@ android {
         multiDexEnabled true
     }
     buildTypes {
+        debug {
+            debuggable true
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -67,7 +73,6 @@ dependencies {
     implementation 'com.google.guava:guava:24.0-android'
 
     implementation 'com.google.maps.android:android-maps-utils:0.5'
-
     implementation 'com.google.android.gms:play-services-maps:' + rootProject.playServicesVersion
     implementation 'com.google.android.gms:play-services-places:' + rootProject.playServicesVersion
     implementation 'com.google.android.gms:play-services-location:' + rootProject.playServicesVersion
