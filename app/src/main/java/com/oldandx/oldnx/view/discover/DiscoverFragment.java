@@ -14,14 +14,14 @@ import android.view.ViewGroup;
 import com.oldandx.oldnx.R;
 import com.oldandx.oldnx.utils.ActivityUtils;
 import com.oldandx.oldnx.view.common.BackHandledFragment;
-import com.oldandx.oldnx.viewmodel.NavigationViewModel;
+import com.oldandx.oldnx.viewmodel.DiscoverViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class DiscoverFragment extends BackHandledFragment {
 
-    private NavigationViewModel mNavigationViewModel;
+    private DiscoverViewModel mDiscoverViewModel;
 
     private FragmentActivity mFragmentActivity;
 
@@ -40,13 +40,14 @@ public class DiscoverFragment extends BackHandledFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mNavigationViewModel = ActivityUtils.obtainViewModel(mFragmentActivity, NavigationViewModel.class);
+        mDiscoverViewModel = ActivityUtils.obtainViewModel(mFragmentActivity, DiscoverViewModel.class);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_discover, container, false);
     }
 
