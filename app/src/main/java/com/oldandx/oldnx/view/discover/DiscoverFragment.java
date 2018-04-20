@@ -11,10 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oldandx.oldnx.R;
+import com.oldandx.oldnx.binding.FragmentDataBindingComponent;
+import com.oldandx.oldnx.databinding.FragmentBoardingBinding;
+import com.oldandx.oldnx.databinding.FragmentDiscoverBinding;
 import com.oldandx.oldnx.utils.ActivityUtils;
+import com.oldandx.oldnx.utils.AutoClearedValue;
 import com.oldandx.oldnx.view.common.BackHandledFragment;
 import com.oldandx.oldnx.viewmodel.DiscoverViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +30,12 @@ public class DiscoverFragment extends BackHandledFragment {
     private DiscoverViewModel mDiscoverViewModel;
 
     private FragmentActivity mFragmentActivity;
+
+    private android.databinding.DataBindingComponent mDataBindingComponent = new FragmentDataBindingComponent(this);
+
+    private AutoClearedValue<CategoryListAdapter> mAdapter;
+
+    private AutoClearedValue<FragmentDiscoverBinding> mBinding;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -46,9 +58,54 @@ public class DiscoverFragment extends BackHandledFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+// Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_discover, container, false);
+        FragmentDiscoverBinding fragmentDiscoverBinding
+                = FragmentDiscoverBinding.inflate(inflater, container, false, mDataBindingComponent);
+
+        mBinding = new AutoClearedValue<>(this, fragmentDiscoverBinding);
+
+        return fragmentDiscoverBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initUI();
+        //subscribeToLiveData();
+    }
+
+    private void initUI() {
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        CategoryListAdapter adapter = new CategoryListAdapter(mDataBindingComponent);
+        this.mAdapter = new AutoClearedValue<>(this, adapter);
+
+        mBinding.get().rvCategoryList.setAdapter(adapter);
+
+        initCategories();
+    }
+
+    private void initCategories() {
+        List<String> categories = new ArrayList<>();
+
+        categories.add("properties");
+        categories.add("cars");
+        categories.add("electronics");
+        categories.add("furniture");
+        categories.add("jobs");
+        categories.add("fashion");
+        categories.add("bikes");
+        categories.add("books");
+        categories.add("mobiles");
+        categories.add("pets");
+        categories.add("services");
+        categories.add("donate");
+
+        mAdapter.get().replace(categories);
     }
 
     @Override

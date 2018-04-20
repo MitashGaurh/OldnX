@@ -50,6 +50,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         } else if (modelClass.isAssignableFrom(NavigationViewModel.class)) {
             //noinspection unchecked
             return (T) new NavigationViewModel(mApplication);
+        }else if (modelClass.isAssignableFrom(DiscoverViewModel.class)) {
+            //noinspection unchecked
+            return (T) new DiscoverViewModel(mApplication);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

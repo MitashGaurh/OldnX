@@ -19,7 +19,7 @@ import java.util.Stack;
 /**
  * Created by Mitash Gaurh on 4/20/2018.
  */
-public abstract class NavigationViewModel extends AndroidViewModel {
+public class NavigationViewModel extends AndroidViewModel {
 
     private final Stack<Fragment> mDiscoverTabStack = new Stack<>();
 
