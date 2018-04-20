@@ -24,7 +24,7 @@ public final class ActivityUtils {
      * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
      * performed by the {@code fragmentManager}.
      */
-    public static void addFragmentToActivity(@Nullable FragmentManager fragmentManager,
+    public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
                                              @NonNull Fragment fragment, int frameId,
                                              boolean isAddToBackStack, @Nullable String tag) {
         checkNotNull(fragmentManager);
@@ -59,7 +59,7 @@ public final class ActivityUtils {
      * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
      * performed by the {@code fragmentManager}.
      */
-    public static void addFragmentToActivityWithSharedElement(@Nullable FragmentManager fragmentManager,
+    public static void addFragmentToActivityWithSharedElement(@NonNull FragmentManager fragmentManager,
                                                               @NonNull Fragment fragment, int frameId,
                                                               View sharedElement, String transitionName,
                                                               boolean isAddToBackStack, @Nullable String tag) {
@@ -75,6 +75,29 @@ public final class ActivityUtils {
         if (isAddToBackStack) {
             transaction.addToBackStack(fragment.getClass().getSimpleName());
         }
+        transaction.commit();
+    }
+
+    /**
+     * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
+     * performed by the {@code fragmentManager}.
+     */
+    public static void addFragmentToContentContainer(@NonNull FragmentManager fragmentManager
+            , @NonNull Fragment fragment, Fragment activeFragment, int frameId, @NonNull String tag, boolean hideShow) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        checkNotNull(tag);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (hideShow) {
+            transaction.hide(activeFragment);
+            transaction.show(fragment);
+        } else {
+            if (null != activeFragment) {
+                transaction.hide(activeFragment);
+            }
+            transaction.add(frameId, fragment, tag);
+        }
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.commit();
     }
 

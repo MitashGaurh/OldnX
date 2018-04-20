@@ -47,6 +47,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         if (modelClass.isAssignableFrom(LinkAccountViewModel.class)) {
             //noinspection unchecked
             return (T) new LinkAccountViewModel(mApplication);
+        } else if (modelClass.isAssignableFrom(NavigationViewModel.class)) {
+            //noinspection unchecked
+            return (T) new NavigationViewModel(mApplication);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
