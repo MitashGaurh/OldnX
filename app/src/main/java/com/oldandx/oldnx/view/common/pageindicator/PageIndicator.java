@@ -3,7 +3,7 @@ package com.oldandx.oldnx.view.common.pageindicator;
 import android.support.v4.view.ViewPager;
 
 /**
- * Created by M1040033 on 6/21/2017.
+ * Created by Pardeep Sharma on 6/21/2017.
  */
 
 public interface PageIndicator extends ViewPager.OnPageChangeListener  {
