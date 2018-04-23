@@ -13,8 +13,6 @@ import com.google.android.gms.location.LocationServices;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * Created by Mitash Gaurh on 4/13/2018.
  */
@@ -28,8 +26,6 @@ public class LocationProvider {
 
     private static final int LOCATION_UPDATE_MIN_TIME = 5000;
 
-    private Context mContext;
-
     private Timer mTimer;
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -42,32 +38,40 @@ public class LocationProvider {
 
     private boolean mNetworkEnabled = false;
 
-    public LocationProvider(Context context) {
-        this.mContext = checkNotNull(context, "context cannot be null.");
+    private static LocationProvider INSTANCE;
+
+    private LocationProvider() {
     }
 
-    public void getCurrentLocation(LocationResult locationResult) {
+    public static LocationProvider getInstance() {
+        if (null == INSTANCE) {
+            INSTANCE = new LocationProvider();
+        }
+        return INSTANCE;
+    }
+
+    public void getCurrentLocation(Context context, LocationResult locationResult) {
         //use LocationResult callback class to pass location value from LocationProvider to user code.
         mLocationResult = locationResult;
 
         if (null == mFusedLocationProviderClient) {
-            mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext);
+            mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
         }
 
         mFusedLocationProviderClient.getLastLocation().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 mLocationResult.onLocationSuccess(task.getResult());
             } else {
-                fetchLocationUsingLocationManager();
+                fetchLocationUsingLocationManager(context);
             }
         });
     }
 
-    private void fetchLocationUsingLocationManager() {
+    private void fetchLocationUsingLocationManager(Context context) {
         //exceptions will be thrown if provider is not permitted.
 
         if (null == mLocationManager) {
-            mLocationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+            mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         }
 
         if (null != mLocationManager) {

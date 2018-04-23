@@ -10,6 +10,13 @@ import com.oldandx.oldnx.R;
  */
 public final class AppUtils {
 
+    /**
+     * Don't let anyone instantiate this class.
+     */
+    private AppUtils() {
+        throw new Error("Do not need instantiate!");
+    }
+
     public static int getDrawableByName(Context context, String drawableName) {
         Resources resources = context.getResources();
         final int resourceId = resources.getIdentifier(drawableName, "drawable",

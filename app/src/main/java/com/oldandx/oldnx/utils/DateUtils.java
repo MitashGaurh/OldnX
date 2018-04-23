@@ -23,14 +23,16 @@ public final class DateUtils {
     public static final String hhmmss = "hh:mm:ss a";
     public static final String DB_DATA_FORMAT = "yyyy-MM-DD HH:mm:ss";
 
-  /*private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-    private static DateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale
-            .ENGLISH);*/
-
     private static DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
     private static DateFormat formatDateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale
             .ENGLISH);
 
+    /**
+     * Don't let anyone instantiate this class.
+     */
+    private DateUtils() {
+        throw new Error("Do not need instantiate!");
+    }
 
     public static String longToSimpleDateString(long DateTimeLong) {
         String parsedDateString;

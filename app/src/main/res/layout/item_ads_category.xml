@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,28 +11,32 @@
     </data>
 
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/iv_category_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:adjustViewBounds="true"
+            android:layout_width="@dimen/dimen_40_dp"
+            android:layout_height="@dimen/dimen_40_dp"
             android:layout_gravity="center"
-            tools:src="@drawable/bikes"
-            app:imageFromResource="@{resourceId}"/>
+            android:layout_marginEnd="@dimen/dimen_15_dp"
+            android:layout_marginStart="@dimen/dimen_15_dp"
+            android:layout_marginTop="@dimen/dimen_10_dp"
+            android:adjustViewBounds="true"
+            app:imageFromResource="@{resourceId}"
+            tools:src="@drawable/bikes" />
 
         <TextView
             android:id="@+id/tv_category_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/theme.Gray"
-            android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dimen_5_dp"
-            tools:text="Category Name"/>
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_12_sp"
+            tools:text="Category Name" />
 
     </LinearLayout>
 </layout>

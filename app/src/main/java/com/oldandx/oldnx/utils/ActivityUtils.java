@@ -21,6 +21,13 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 public final class ActivityUtils {
 
     /**
+     * Don't let anyone instantiate this class.
+     */
+    private ActivityUtils() {
+        throw new Error("Do not need instantiate!");
+    }
+
+    /**
      * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
      * performed by the {@code fragmentManager}.
      */

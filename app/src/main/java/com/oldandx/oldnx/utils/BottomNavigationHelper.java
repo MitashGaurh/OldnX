@@ -28,6 +28,13 @@ public final class BottomNavigationHelper {
     public static final int NO_COLOR = Color.TRANSPARENT;
 
     /**
+     * Don't let anyone instantiate this class.
+     */
+    private BottomNavigationHelper() {
+        throw new Error("Do not need instantiate!");
+    }
+
+    /**
      * @param context used to get system services
      * @return screenWidth in pixels
      */

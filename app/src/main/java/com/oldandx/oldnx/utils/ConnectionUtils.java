@@ -22,6 +22,13 @@ import java.util.regex.Pattern;
 public final class ConnectionUtils {
 
     /**
+     * Don't let anyone instantiate this class.
+     */
+    private ConnectionUtils() {
+        throw new Error("Do not need instantiate!");
+    }
+
+    /**
      * Method to check if a device is connected to internet or not
      *
      * @param context application context
@@ -46,7 +53,7 @@ public final class ConnectionUtils {
     public static boolean isGpsEnabled(Context context) {
         LocationManager lm = (LocationManager) context
                 .getSystemService(Context.LOCATION_SERVICE);
-        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return null != lm && lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     /**
@@ -58,8 +65,11 @@ public final class ConnectionUtils {
     public static boolean isWifi(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetInfo != null
+        NetworkInfo activeNetInfo = null;
+        if (null != connectivityManager) {
+            activeNetInfo = connectivityManager.getActiveNetworkInfo();
+        }
+        return null != activeNetInfo
                 && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
@@ -72,8 +82,11 @@ public final class ConnectionUtils {
     public static boolean is3G(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetInfo != null
+        NetworkInfo activeNetInfo = null;
+        if (null != connectivityManager) {
+            activeNetInfo = connectivityManager.getActiveNetworkInfo();
+        }
+        return null != activeNetInfo
                 && activeNetInfo.getType() == ConnectivityManager.TYPE_MOBILE;
     }
 
@@ -86,20 +99,21 @@ public final class ConnectionUtils {
     public static boolean is4G(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetInfo != null && activeNetInfo.isConnectedOrConnecting()) {
-            if (activeNetInfo.getType() == TelephonyManager.NETWORK_TYPE_LTE) {
-                return true;
-            }
+        NetworkInfo activeNetInfo = null;
+        if (null != connectivityManager) {
+            activeNetInfo = connectivityManager.getActiveNetworkInfo();
         }
-        return false;
+        return activeNetInfo != null && activeNetInfo.isConnectedOrConnecting() && activeNetInfo.getType() == TelephonyManager.NETWORK_TYPE_LTE;
     }
 
     public static boolean isWiFiAvailable(Context context) {
         ConnectivityManager manager = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        State wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-                .getState();
+        State wifi = null;
+        if (null != manager) {
+            wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+                    .getState();
+        }
         return wifi == State.CONNECTED || wifi == State.CONNECTING;
 
     }
@@ -159,8 +173,11 @@ public final class ConnectionUtils {
         NetState stateCode = NetState.NET_NO;
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni != null && ni.isConnectedOrConnecting()) {
+        NetworkInfo ni = null;
+        if (null != cm) {
+            ni = cm.getActiveNetworkInfo();
+        }
+        if (null != ni && ni.isConnectedOrConnecting()) {
             switch (ni.getType()) {
                 case ConnectivityManager.TYPE_WIFI:
                     stateCode = NetState.NET_WIFI;

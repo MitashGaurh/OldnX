@@ -8,6 +8,13 @@ import android.view.View;
  */
 public class SnackBarUtils {
 
+    /**
+     * Don't let anyone instantiate this class.
+     */
+    private SnackBarUtils() {
+        throw new Error("Do not need instantiate!");
+    }
+
     public static void showSnackBar(View v, String snackBarText) {
         if (v == null || snackBarText == null) {
             return;

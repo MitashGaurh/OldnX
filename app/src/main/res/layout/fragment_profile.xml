@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.profile.ProfileFragment">
+
+    <ImageView
+        android:id="@+id/iv_cover_image"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/iv_cover_image"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:padding="@dimen/dimen_5_dp"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dimen_60_dp"
+                android:layout_marginTop="@dimen/dimen_40_dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_10_dp"
+                    android:layout_marginStart="@dimen/dimen_10_dp"
+
+                    android:padding="@dimen/dimen_5_dp"
+                    android:textSize="@dimen/text_size_16_sp"
+                    android:textStyle="bold"
+                    tools:text="User Name" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_10_dp"
+                    android:layout_marginStart="@dimen/dimen_10_dp"
+                    android:padding="@dimen/dimen_5_dp"
+                    android:textSize="@dimen/text_size_14_sp"
+                    android:text="Verified with" />
+
+                <Button
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_5_dp"
+                    android:layout_marginStart="@dimen/dimen_5_dp"
+                    android:layout_marginTop="@dimen/dimen_20_dp"
+                    android:gravity="start|center"
+                    android:text="Account and payments"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_size_14_sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="@dimen/dimen_15_dp"
+                    android:background="@color/cardview_shadow_start_color" />
+
+                <Button
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_5_dp"
+                    android:layout_marginStart="@dimen/dimen_5_dp"
+                    android:gravity="start|center"
+                    android:text="Feedback and help"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_size_14_sp" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </ScrollView>
+
+    <com.oldandx.oldnx.view.common.circleimageview.CircleImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignBottom="@id/iv_cover_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-40dp"
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="2dp"
+        tools:src="@drawable/bikes" />
+
+</RelativeLayout>

@@ -14,7 +14,6 @@ import java.util.Locale;
 import timber.log.Timber;
 
 /**
- * Created by Pardeep Sharma on 12/12/2017.
  * This class saves daily logs into a HTML file under downloads folder(internal storage).
  */
 

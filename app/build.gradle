@@ -51,12 +51,11 @@ dependencies {
 
     //lifecycle architecture components libs.
     implementation 'android.arch.lifecycle:extensions:' + rootProject.lifecycleVersion
-    // Java8 support for Lifecycles
+    // Java8 support for Life Cycle
     implementation 'android.arch.lifecycle:common-java8:' + rootProject.lifecycleVersion
     // Room (use 1.1.0-beta2 for latest beta)
     implementation 'android.arch.persistence.room:runtime:' + rootProject.roomVersion
     annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.roomVersion
-    //----------------------------------------
 
     //for Network call
     implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
@@ -84,6 +83,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:' + rootProject.timberVersion
 
     testImplementation 'junit:junit:4.12'
+    //noinspection GradleCompatible
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

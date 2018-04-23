@@ -1,5 +1,6 @@
 package com.oldandx.oldnx.view.discover;
 
+import android.databinding.DataBindingComponent;
 import android.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -11,21 +12,20 @@ import com.oldandx.oldnx.view.common.baseadapter.DataBoundListAdapter;
 public class CategoryListAdapter extends DataBoundListAdapter<String, ItemAdsCategoryBinding> {
 
     //region Private Methods
-    private final android.databinding.DataBindingComponent mDataBindingComponent;
+    private final DataBindingComponent mDataBindingComponent;
     //endregion
 
-    CategoryListAdapter(android.databinding.DataBindingComponent dataBindingComponent) {
+    CategoryListAdapter(DataBindingComponent dataBindingComponent) {
         this.mDataBindingComponent = dataBindingComponent;
     }
 
     @Override
     protected ItemAdsCategoryBinding createBinding(ViewGroup parent, int viewType) {
-        ItemAdsCategoryBinding binding = DataBindingUtil
+
+        return DataBindingUtil
                 .inflate(LayoutInflater.from(parent.getContext()),
                         R.layout.item_ads_category, parent, false,
                         mDataBindingComponent);
-
-        return binding;
     }
 
     @Override
@@ -33,10 +33,10 @@ public class CategoryListAdapter extends DataBoundListAdapter<String, ItemAdsCat
 
         binding.tvCategoryText.setText(item);
 
-        int drawableResourceId = binding.getRoot().getResources().getIdentifier(item, "drawable", binding.getRoot().getContext().getPackageName());
+        int drawableResourceId = binding.getRoot().getResources().getIdentifier(item.toLowerCase()
+                , "drawable", binding.getRoot().getContext().getPackageName());
 
         binding.setResourceId(drawableResourceId);
-        // binding.ivCategoryImage.setImageResource(AppUtils.getDrawableByName(binding.getRoot().getContext(), item));
     }
 
     @Override

@@ -19,6 +19,13 @@ public final class AnimationUtil {
     public static int ANIMATION_DURATION_MEDIUM = 400;
     public static int ANIMATION_DURATION_LONG = 800;
 
+    /**
+     * Don't let anyone instantiate this class.
+     */
+    private AnimationUtil() {
+        throw new Error("Do not need instantiate!");
+    }
+
     public interface AnimationListener {
         /**
          * @return true to override parent. Else execute Parent method

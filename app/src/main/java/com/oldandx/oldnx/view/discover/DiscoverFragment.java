@@ -92,18 +92,18 @@ public class DiscoverFragment extends BackHandledFragment {
     private void initCategories() {
         List<String> categories = new ArrayList<>();
 
-        categories.add("properties");
-        categories.add("cars");
-        categories.add("electronics");
-        categories.add("furniture");
-        categories.add("jobs");
-        categories.add("fashion");
-        categories.add("bikes");
-        categories.add("books");
-        categories.add("mobiles");
-        categories.add("pets");
-        categories.add("services");
-        categories.add("donate");
+        categories.add("Properties");
+        categories.add("Cars");
+        categories.add("Electronics");
+        categories.add("Furniture");
+        categories.add("Jobs");
+        categories.add("Fashion");
+        categories.add("Bikes");
+        categories.add("Books");
+        categories.add("Mobiles");
+        categories.add("Pets");
+        categories.add("Services");
+        categories.add("Donate");
 
         mAdapter.get().replace(categories);
     }
