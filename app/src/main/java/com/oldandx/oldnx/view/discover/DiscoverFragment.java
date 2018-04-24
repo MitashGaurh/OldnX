@@ -16,7 +16,6 @@ import com.oldandx.oldnx.binding.FragmentDataBindingComponent;
 import com.oldandx.oldnx.databinding.FragmentDiscoverBinding;
 import com.oldandx.oldnx.utils.ActivityUtils;
 import com.oldandx.oldnx.utils.AutoClearedValue;
-import com.oldandx.oldnx.view.common.BackHandledFragment;
 import com.oldandx.oldnx.viewmodel.DiscoverViewModel;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DiscoverFragment extends BackHandledFragment {
+public class DiscoverFragment extends Fragment {
 
     private DiscoverViewModel mDiscoverViewModel;
 
@@ -106,10 +105,5 @@ public class DiscoverFragment extends BackHandledFragment {
         categories.add("Donate");
 
         mAdapter.get().replace(categories);
-    }
-
-    @Override
-    public boolean onBackPressed() {
-        return false;
     }
 }

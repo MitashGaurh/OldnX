@@ -41,6 +41,7 @@ public class NavigationFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mNavigationViewModel = ActivityUtils.obtainViewModel(mFragmentActivity, NavigationViewModel.class);
+        mNavigationViewModel.initFragmentManager(getChildFragmentManager());
 
         subscribeViewEvent();
     }
@@ -56,17 +57,15 @@ public class NavigationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mNavigationViewModel.performBottomTabFragmentsTransaction(getChildFragmentManager(), BottomTab.DISCOVER);
+        mNavigationViewModel.performBottomTabFragmentsTransaction(BottomTab.DISCOVER);
     }
 
     private void subscribeViewEvent() {
         mNavigationViewModel.getBottomTabSelectedEvent().observe(this
-                , bottomTab -> mNavigationViewModel.performBottomTabFragmentsTransaction(getChildFragmentManager()
-                        , bottomTab));
+                , bottomTab -> mNavigationViewModel.performBottomTabFragmentsTransaction(bottomTab));
 
         mNavigationViewModel.getStackFragmentEvent().observe(this
-                , stackFragment -> mNavigationViewModel.performStackFragmentsTransaction(getChildFragmentManager()
-                        , stackFragment));
+                , stackFragment -> mNavigationViewModel.performStackFragmentsTransaction(stackFragment));
 
     }
 }

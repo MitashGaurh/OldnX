@@ -10,11 +10,14 @@ import com.oldandx.oldnx.R;
 import com.oldandx.oldnx.utils.ActivityUtils;
 import com.oldandx.oldnx.view.chat.ChatFragment;
 import com.oldandx.oldnx.view.discover.DiscoverFragment;
+import com.oldandx.oldnx.view.profile.ProfileFragment;
 import com.oldandx.oldnx.vo.BottomTab;
 import com.oldandx.oldnx.vo.StackFragment;
 import com.oldandx.oldnx.vo.event.SingleLiveEvent;
 
 import java.util.Stack;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by Mitash Gaurh on 4/20/2018.
@@ -35,8 +38,14 @@ public class NavigationViewModel extends AndroidViewModel {
 
     private Fragment mActiveFragment;
 
+    private FragmentManager mFragmentManager;
+
     NavigationViewModel(@NonNull Application application) {
         super(application);
+    }
+
+    public void initFragmentManager(FragmentManager fragmentManager) {
+        mFragmentManager = checkNotNull(fragmentManager, "fragmentManager cannot be null.");
     }
 
     public SingleLiveEvent<BottomTab> getBottomTabSelectedEvent() {
@@ -51,63 +60,91 @@ public class NavigationViewModel extends AndroidViewModel {
         mBottomTabSelectedEvent.setValue(bottomTab);
     }
 
-    public void performBottomTabFragmentsTransaction(FragmentManager fragmentManager, BottomTab bottomTab) {
+    public void performBottomTabFragmentsTransaction(BottomTab bottomTab) {
 
         switch (bottomTab) {
             case DISCOVER:
-                updateStackAlongWithManager(fragmentManager, mDiscoverTabStack, new DiscoverFragment());
+                updateStackAlongWithManager(mDiscoverTabStack, DiscoverFragment.newInstance(), true);
                 break;
             case CHAT:
-                updateStackAlongWithManager(fragmentManager, mChatTabStack, new ChatFragment());
+                updateStackAlongWithManager(mChatTabStack, new ChatFragment(), true);
                 break;
             case SELL:
                 break;
             case PRICE:
                 break;
             case PROFILE:
+                updateStackAlongWithManager(mProfileTabStack, new ProfileFragment(), true);
                 break;
         }
     }
 
-    public void performStackFragmentsTransaction(FragmentManager fragmentManager, StackFragment stackFragment) {
+    public void performStackFragmentsTransaction(StackFragment stackFragment) {
+
+        Stack<Fragment> stack = null;
 
         switch (stackFragment.bottomTab) {
             case DISCOVER:
-                updateStackAlongWithManager(fragmentManager, mDiscoverTabStack, stackFragment.fragment);
+                stack = mDiscoverTabStack;
                 break;
+
             case CHAT:
-                updateStackAlongWithManager(fragmentManager, mChatTabStack, stackFragment.fragment);
+                stack = mChatTabStack;
                 break;
+
             case SELL:
                 break;
+
             case PRICE:
                 break;
+
             case PROFILE:
+                stack = mProfileTabStack;
                 break;
+        }
+        updateStackAlongWithManager(stack, stackFragment.fragment, false);
+    }
+
+    private void updateStackAlongWithManager(Stack<Fragment> stack, Fragment fragment, boolean isFromBottomTabs) {
+
+        Fragment fragmentByTag = mFragmentManager.findFragmentByTag(fragment.getClass().getSimpleName());
+
+        if (null != fragmentByTag) {
+            if (isFromBottomTabs) {
+                if (stack.search(fragmentByTag) != -1) {
+                    fragmentByTag = stack.peek();
+                } else {
+                    stack.push(fragmentByTag);
+                }
+            } else {
+                fragmentByTag = fragment;
+                stack.push(fragmentByTag);
+            }
+            performFragmentTransaction(fragmentByTag, true);
+        } else {
+            stack.push(fragment);
+            performFragmentTransaction(fragment, false);
         }
     }
 
-    private void updateStackAlongWithManager(FragmentManager fragmentManager
-            , Stack<Fragment> stack, Fragment fragment) {
-
-        Fragment fragmentByTag = fragmentManager.findFragmentByTag(fragment.getClass().getSimpleName());
-
-        if (null != fragmentByTag) {
-            if (stack.search(fragmentByTag) != -1) {
-                fragmentByTag = stack.peek();
-            } else {
-                stack.push(fragmentByTag);
-            }
-            ActivityUtils.addFragmentToContentContainer(fragmentManager
-                    , fragmentByTag, mActiveFragment, R.id.content_container
-                    , fragmentByTag.getClass().getSimpleName(), true);
-            mActiveFragment = fragmentByTag;
+    public boolean popProfileBackStack() {
+        if (mProfileTabStack.size() > 1) {
+            backStackOperation(mProfileTabStack);
+            return true;
         } else {
-            stack.push(fragment);
-            ActivityUtils.addFragmentToContentContainer(fragmentManager
-                    , fragment, mActiveFragment, R.id.content_container
-                    , fragment.getClass().getSimpleName(), false);
-            mActiveFragment = fragment;
+            return false;
         }
+    }
+
+    private void backStackOperation(Stack<Fragment> stack) {
+        mFragmentManager.beginTransaction().remove(stack.pop()).commit();
+        performFragmentTransaction(stack.peek(), true);
+    }
+
+    private void performFragmentTransaction(Fragment fragment, boolean isHideShow) {
+        ActivityUtils.addFragmentToContentContainer(mFragmentManager
+                , fragment, mActiveFragment, R.id.content_container
+                , fragment.getClass().getSimpleName(), isHideShow);
+        mActiveFragment = fragment;
     }
 }

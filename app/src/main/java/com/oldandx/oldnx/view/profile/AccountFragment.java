@@ -13,14 +13,13 @@ import android.view.ViewGroup;
 
 import com.oldandx.oldnx.R;
 import com.oldandx.oldnx.utils.ActivityUtils;
+import com.oldandx.oldnx.view.common.BackHandledFragment;
 import com.oldandx.oldnx.viewmodel.NavigationViewModel;
-import com.oldandx.oldnx.vo.BottomTab;
-import com.oldandx.oldnx.vo.StackFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment {
+public class AccountFragment extends BackHandledFragment {
 
     private NavigationViewModel mNavigationViewModel;
 
@@ -33,8 +32,8 @@ public class ProfileFragment extends Fragment {
         mFragmentActivity = (FragmentActivity) activity;
     }
 
-    public static ProfileFragment newInstance() {
-        return new ProfileFragment();
+    public static AccountFragment newInstance() {
+        return new AccountFragment();
     }
 
     @Override
@@ -48,16 +47,11 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        rootView.findViewById(R.id.btn_account).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mNavigationViewModel.getStackFragmentEvent().setValue(new StackFragment(BottomTab.PROFILE, AccountFragment.newInstance()));
-            }
-        });
-
-        return rootView;
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return mNavigationViewModel.popProfileBackStack();
+    }
 }
