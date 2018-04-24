@@ -40,6 +40,8 @@ public class NavigationViewModel extends AndroidViewModel {
 
     private FragmentManager mFragmentManager;
 
+    private BottomTab mCurrentTab;
+
     NavigationViewModel(@NonNull Application application) {
         super(application);
     }
@@ -61,6 +63,7 @@ public class NavigationViewModel extends AndroidViewModel {
     }
 
     public void performBottomTabFragmentsTransaction(BottomTab bottomTab) {
+        mCurrentTab = bottomTab;
 
         switch (bottomTab) {
             case DISCOVER:
@@ -82,6 +85,7 @@ public class NavigationViewModel extends AndroidViewModel {
     public void performStackFragmentsTransaction(StackFragment stackFragment) {
 
         Stack<Fragment> stack = null;
+        mCurrentTab = stackFragment.bottomTab;
 
         switch (stackFragment.bottomTab) {
             case DISCOVER:
@@ -128,7 +132,7 @@ public class NavigationViewModel extends AndroidViewModel {
     }
 
     public boolean popProfileBackStack() {
-        if (mProfileTabStack.size() > 1) {
+        if (mProfileTabStack.size() > 1 && mCurrentTab == BottomTab.PROFILE) {
             backStackOperation(mProfileTabStack);
             return true;
         } else {
