@@ -2,6 +2,7 @@ package com.oldandx.oldnx.view.discover;
 
 
 import android.app.Activity;
+import android.databinding.DataBindingComponent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oldandx.oldnx.binding.FragmentDataBindingComponent;
-import com.oldandx.oldnx.databinding.FragmentBoardingBinding;
 import com.oldandx.oldnx.databinding.FragmentDiscoverBinding;
 import com.oldandx.oldnx.utils.ActivityUtils;
 import com.oldandx.oldnx.utils.AutoClearedValue;
@@ -31,7 +31,7 @@ public class DiscoverFragment extends BackHandledFragment {
 
     private FragmentActivity mFragmentActivity;
 
-    private android.databinding.DataBindingComponent mDataBindingComponent = new FragmentDataBindingComponent(this);
+    private DataBindingComponent mDataBindingComponent = new FragmentDataBindingComponent(this);
 
     private AutoClearedValue<CategoryListAdapter> mAdapter;
 
@@ -58,7 +58,7 @@ public class DiscoverFragment extends BackHandledFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-// Inflate the layout for this fragment
+        // Inflate the layout for this fragment
 
         FragmentDiscoverBinding fragmentDiscoverBinding
                 = FragmentDiscoverBinding.inflate(inflater, container, false, mDataBindingComponent);
@@ -69,7 +69,7 @@ public class DiscoverFragment extends BackHandledFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         initUI();
